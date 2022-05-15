@@ -1,0 +1,2646 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Open Insurance (OPIN) API",
+    "description": "Open API specification developed for OPIN by Bhagvan Kommadi",
+    "contact": {
+      "email": "connect@openinsurance.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/Open-Insurance-io/Open_Insurance_API/1.0.0"
+    }
+  ],
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/vehicle": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "returns vehicle",
+        "description": "By passing in the appropriate options, you can search for\nVehicle in the system\n",
+        "operationId": "search vehicle by vehicle id",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "pass an optional search string for looking up Vehicle",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip for pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of records to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 50,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vehicle"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds a vehicle",
+        "description": "Adds an item to the system",
+        "operationId": "addVehicle",
+        "requestBody": {
+          "description": "Vehicle to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Vehicle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/claim": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "returns claim",
+        "description": "By passing in the appropriate options, you can search for\nclaim in the system\n",
+        "operationId": "search claim by claim id",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "pass an optional search string for looking up claim",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip for pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of records to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 50,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds a claim",
+        "description": "Adds an item to the system",
+        "operationId": "addClaim",
+        "requestBody": {
+          "description": "Claim to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/driver": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "returns driver",
+        "description": "By passing in the appropriate options, you can search for\nclaim in the system\n",
+        "operationId": "search driver by driver id",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "pass an optional search string for looking up driver",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip for pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of records to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 50,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds a Driver",
+        "description": "Adds an item to the system",
+        "operationId": "addDriver",
+        "requestBody": {
+          "description": "Driver to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Driver"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/motorCoverage": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "returns motorCoverage",
+        "description": "By passing in the appropriate options, you can search for\nclaim in the system\n",
+        "operationId": "search motorCoverage by motorCoverage id",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "pass an optional search string for looking up motorCoverage",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip for pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of records to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 50,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds a MotorCoverage",
+        "description": "Adds an item to the system",
+        "operationId": "addMotorCoverage",
+        "requestBody": {
+          "description": "motorCoverage to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/motorCoverage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "HP": {
+            "type": "number",
+            "format": "float"
+          },
+          "KW": {
+            "type": "number",
+            "format": "float"
+          },
+          "torque": {
+            "type": "number",
+            "format": "float"
+          },
+          "evHP": {
+            "type": "number",
+            "format": "float"
+          },
+          "evKW": {
+            "type": "number",
+            "format": "float"
+          },
+          "evTorque": {
+            "type": "number",
+            "format": "float"
+          },
+          "acceleration": {
+            "type": "number",
+            "format": "float"
+          },
+          "vehicleTopSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "engineCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "modelYear": {
+            "type": "number",
+            "format": "float"
+          },
+          "hasTractionEnabled": {
+            "type": "boolean"
+          },
+          "hasImmobilizer": {
+            "type": "boolean"
+          },
+          "hasTheftDetection": {
+            "type": "boolean"
+          },
+          "currentMileageDynamic": {
+            "type": "number",
+            "format": "float"
+          },
+          "yearlyMilageDynamic": {
+            "type": "number",
+            "format": "float"
+          },
+          "highwayYearlyMilageDynamic": {
+            "type": "number",
+            "format": "float"
+          },
+          "dailyMilageDynamic": {
+            "type": "number",
+            "format": "float"
+          },
+          "serviceHistory": {
+            "type": "number",
+            "format": "float"
+          },
+          "serviceDue": {
+            "type": "number",
+            "format": "float"
+          },
+          "timeToService": {
+            "type": "number",
+            "format": "float"
+          },
+          "recallHistory": {
+            "type": "number",
+            "format": "float"
+          },
+          "tractionControlEngaged": {
+            "type": "boolean"
+          },
+          "accelerationLongitudinal": {
+            "type": "number",
+            "format": "float"
+          },
+          "accelerationLateral": {
+            "type": "number",
+            "format": "float"
+          },
+          "accelerationVertical": {
+            "type": "number",
+            "format": "float"
+          },
+          "brakingFrequency": {
+            "type": "number",
+            "format": "float"
+          },
+          "brakePedalForce": {
+            "type": "number",
+            "format": "float"
+          },
+          "brakePedalSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "performanceMode": {
+            "type": "number",
+            "format": "float"
+          },
+          "emergencyBraking": {
+            "type": "number",
+            "format": "float"
+          },
+          "engnitionOn": {
+            "type": "boolean"
+          },
+          "engnitionOff": {
+            "type": "boolean"
+          },
+          "ignitionOnTime": {
+            "type": "number",
+            "format": "float"
+          },
+          "ignitionOffTime": {
+            "type": "number",
+            "format": "float"
+          },
+          "logitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "altitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "heading": {
+            "type": "number",
+            "format": "float"
+          },
+          "isMoving": {
+            "type": "boolean"
+          },
+          "hornIsActive": {
+            "type": "boolean"
+          },
+          "drivingSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "wheelSpin": {
+            "type": "number",
+            "format": "float"
+          },
+          "decelrationRate": {
+            "type": "number",
+            "format": "float"
+          },
+          "steeringSpeedTurn": {
+            "type": "number",
+            "format": "float"
+          },
+          "laneDepartureWarnning": {
+            "type": "number",
+            "format": "float"
+          },
+          "adasAbsIsActive": {
+            "type": "boolean"
+          },
+          "obstacleDetectionIsActive": {
+            "type": "boolean"
+          },
+          "driverIntervention": {
+            "type": "boolean"
+          },
+          "obstacleDetectionWarning": {
+            "type": "string"
+          },
+          "speedSet": {
+            "type": "number",
+            "format": "float"
+          },
+          "yaw": {
+            "type": "number",
+            "format": "float"
+          },
+          "pitch": {
+            "type": "number",
+            "format": "float"
+          },
+          "roll": {
+            "type": "number",
+            "format": "float"
+          },
+          "gForce": {
+            "type": "number",
+            "format": "float"
+          },
+          "trailerIncluded": {
+            "type": "boolean"
+          },
+          "row1Pos1Isbelted": {
+            "type": "boolean"
+          },
+          "row1Pos2Isbelted": {
+            "type": "boolean"
+          },
+          "row2Pos1Isbelted": {
+            "type": "boolean"
+          },
+          "row2Pos2Isbelted": {
+            "type": "boolean"
+          },
+          "cabinTemp": {
+            "type": "number",
+            "format": "float"
+          },
+          "cabinHumidity": {
+            "type": "number",
+            "format": "float"
+          },
+          "tireConditionRow1Left": {
+            "type": "string"
+          },
+          "tireConditionRow1Right": {
+            "type": "string"
+          },
+          "tireConditionRow2Left": {
+            "type": "string"
+          },
+          "tireConditionRow2Right": {
+            "type": "string"
+          },
+          "tirePressureRow1Left": {
+            "type": "string"
+          },
+          "tirePressureRow1Right": {
+            "type": "string"
+          },
+          "tirePressureRow2Left": {
+            "type": "string"
+          },
+          "tirePressureRow2Right": {
+            "type": "string"
+          },
+          "brakePadWearRow1Left": {
+            "type": "string"
+          },
+          "brakePadWearRow1Right": {
+            "type": "string"
+          },
+          "brakePadWearRow2Left": {
+            "type": "string"
+          },
+          "brakePadWearRow2Right": {
+            "type": "string"
+          },
+          "brakesWearRow1Right": {
+            "type": "string"
+          },
+          "brakesWearRow1Left": {
+            "type": "string"
+          },
+          "brakeWearRow2Left": {
+            "type": "string"
+          },
+          "brakeWearRow2Right": {
+            "type": "string"
+          },
+          "clutchWear": {
+            "type": "number",
+            "format": "float"
+          },
+          "dashboardWarnning": {
+            "type": "string"
+          },
+          "hasAirbagDeployed": {
+            "type": "boolean"
+          },
+          "hasBrakesError": {
+            "type": "boolean"
+          },
+          "engineWarning": {
+            "type": "string"
+          },
+          "KnownVehicleDamage": {
+            "type": "string"
+          },
+          "damagedParts": {
+            "type": "string"
+          },
+          "damagedPartsCost": {
+            "type": "number",
+            "format": "float"
+          },
+          "upcomingService": {
+            "type": "string",
+            "format": "date"
+          },
+          "occupiedSeats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childSeatOccupiesSeat": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consentGranted": {
+            "type": "boolean"
+          },
+          "plateNumber": {
+            "type": "string"
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "countryOfRegistration": {
+            "type": "string"
+          },
+          "chassisNumber": {
+            "type": "string"
+          },
+          "vin": {
+            "type": "string"
+          },
+          "engineNumber": {
+            "type": "string"
+          },
+          "vehicleWeight": {
+            "type": "number",
+            "format": "float"
+          },
+          "agencyRepair": {
+            "type": "boolean"
+          },
+          "bodyType": {
+            "type": "string",
+            "format": "bodyType"
+          },
+          "fuelType": {
+            "type": "string",
+            "format": "fuelType"
+          },
+          "aiClassification": {
+            "type": "string",
+            "format": "aiClassification"
+          },
+          "vehicleUse": {
+            "type": "boolean",
+            "format": "vehicleUse"
+          },
+          "vehicleGarage": {
+            "type": "boolean"
+          },
+          "vehicleBrand": {
+            "type": "string"
+          },
+          "vehicleModel": {
+            "type": "string"
+          },
+          "seats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colour": {
+            "type": "string"
+          },
+          "sumInsured": {
+            "type": "number",
+            "format": "float"
+          },
+          "accessories": {
+            "type": "string"
+          },
+          "accessoryValue": {
+            "type": "string"
+          },
+          "co2Emissions": {
+            "type": "boolean"
+          },
+          "automaticTransmission": {
+            "type": "boolean"
+          },
+          "lefthandDrive": {
+            "type": "boolean"
+          },
+          "doors": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "securityDevice": {
+            "type": "boolean"
+          },
+          "modification": {
+            "type": "boolean"
+          },
+          "digitalKeyUsed": {
+            "type": "boolean"
+          },
+          "blueBadgeAdapted": {
+            "type": "boolean"
+          },
+          "distanceUnit": {
+            "type": "string"
+          },
+          "pleasureDistance": {
+            "type": "number",
+            "format": "float"
+          },
+          "businessDistance": {
+            "type": "number",
+            "format": "float"
+          },
+          "currentMileage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yearlyMilage": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "xml": {
+          "name": "Vehicle"
+        }
+      },
+      "Claim": {
+        "type": "object",
+        "properties": {
+          "claimType": {
+            "type": "string",
+            "format": "claimType"
+          },
+          "location": {
+            "type": "string"
+          },
+          "lossCause": {
+            "type": "string",
+            "format": "perils"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fnol": {
+            "type": "string",
+            "format": "date"
+          },
+          "claimNumber": {
+            "type": "string"
+          },
+          "liabilityShare": {
+            "type": "number",
+            "format": "float"
+          },
+          "reserve": {
+            "type": "number",
+            "format": "float"
+          },
+          "claimStatus": {
+            "type": "string",
+            "format": "claimStatus"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "format": "date"
+          },
+          "reopenDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "excessAmount": {
+            "type": "number",
+            "format": "float"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "format": "paymentMethod"
+          },
+          "documents": {
+            "type": "string"
+          },
+          "lossDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "xml": {
+          "name": "Claim"
+        }
+      },
+      "Driver": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "format": "gender"
+          },
+          "driverDOB": {
+            "type": "string",
+            "format": "date"
+          },
+          "isPrimaryDriver": {
+            "type": "boolean"
+          },
+          "licence": {
+            "type": "string",
+            "format": "drivingLicense"
+          },
+          "noClaimsDiscount": {
+            "type": "number",
+            "format": "float"
+          },
+          "conviction": {
+            "type": "string",
+            "format": "conviction"
+          },
+          "medicalConditon": {
+            "type": "string",
+            "format": "medicalCondition"
+          },
+          "loading": {
+            "type": "number",
+            "format": "float"
+          },
+          "isBlueBadge": {
+            "type": "boolean"
+          },
+          "nonMotorConviction": {
+            "type": "string"
+          },
+          "workStatus": {
+            "type": "string",
+            "format": "workStatus"
+          },
+          "occupation": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Driver"
+        }
+      },
+      "motorCoverage": {
+        "type": "object",
+        "properties": {
+          "policyNumber": {
+            "type": "string"
+          },
+          "inceptionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "format": "policyStatus"
+          },
+          "discountAmount": {
+            "type": "number",
+            "format": "float"
+          },
+          "premiumRate": {
+            "type": "number",
+            "format": "float"
+          },
+          "grossWrittenPremium": {
+            "type": "number",
+            "format": "float"
+          },
+          "salesTax": {
+            "type": "number",
+            "format": "float"
+          },
+          "brokeragePercentage": {
+            "type": "number",
+            "format": "float"
+          },
+          "brokerageAmount": {
+            "type": "number",
+            "format": "float"
+          },
+          "premiumPaymentFrequency": {
+            "type": "number",
+            "format": "premiumPaymentFrequency"
+          },
+          "indemnityLimitPolicy": {
+            "type": "number",
+            "format": "int32"
+          },
+          "indemnityLimitAccident": {
+            "type": "number",
+            "format": "int32"
+          },
+          "isAgreedValue": {
+            "type": "boolean"
+          },
+          "endorsementID": {
+            "type": "string"
+          },
+          "endorsementDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endorsementType": {
+            "type": "string",
+            "format": "endorsementType"
+          },
+          "peril": {
+            "type": "string",
+            "format": "motorPeril"
+          },
+          "voluntaryDeductiblePercentage": {
+            "type": "number",
+            "format": "float"
+          },
+          "voluntaryDeductibleAmount": {
+            "type": "number",
+            "format": "int32"
+          },
+          "compulsoryDeductiblePercentage": {
+            "type": "number",
+            "format": "float"
+          },
+          "compulsoryDeductibleAmount": {
+            "type": "number",
+            "format": "int32"
+          },
+          "windscreenDeductiblePercentage": {
+            "type": "number",
+            "format": "float"
+          },
+          "windscreenDeductibleAmount": {
+            "type": "number",
+            "format": "int32"
+          },
+          "distanceUnit": {
+            "type": "number",
+            "format": "distanceUnit"
+          },
+          "pleasureDistance": {
+            "type": "number",
+            "format": "float"
+          },
+          "businessDistance": {
+            "type": "number",
+            "format": "float"
+          },
+          "numberOfVehicles": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "xml": {
+          "name": "motorCoverage"
+        }
+      },
+      "InsuranceEntity": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "format": "entityType"
+          },
+          "tradeName": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "classification": {
+            "type": "string",
+            "format": "classification"
+          },
+          "registrationNumber": {
+            "type": "string"
+          },
+          "yearEstablished": {
+            "type": "string",
+            "format": "date"
+          },
+          "address": {
+            "type": "string",
+            "format": "address"
+          },
+          "website": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          },
+          "creditRating": {
+            "type": "string"
+          },
+          "developerPortal": {
+            "type": "string"
+          },
+          "productCatalog": {
+            "type": "string",
+            "format": "productCatalog"
+          },
+          "vat": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "InsuranceEntity"
+        }
+      },
+      "Personal": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "salutation": {
+            "type": "string",
+            "format": "salutation"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "format": "gender"
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobilePhone": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string",
+            "format": "address"
+          },
+          "idType": {
+            "type": "string",
+            "format": "idType"
+          },
+          "idNumber": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "policyholderPreferredLanguage": {
+            "type": "string"
+          }
+        }
+      },
+      "Commercial": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "registeredAddress": {
+            "type": "string",
+            "format": "address"
+          },
+          "dateFounded": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "preferredLanguage": {
+            "type": "string"
+          },
+          "registrationNumber": {
+            "type": "string"
+          },
+          "vat": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "lineOfBusiness": {
+            "type": "string",
+            "format": "productCatalog"
+          },
+          "productModel": {
+            "type": "string",
+            "format": "productModel"
+          },
+          "contractType": {
+            "type": "string",
+            "format": "contractType"
+          },
+          "gracePeriod": {
+            "type": "string",
+            "format": "date"
+          },
+          "currency": {
+            "type": "string",
+            "format": "currency"
+          },
+          "policyWording": {
+            "type": "string",
+            "format": "policyWording"
+          },
+          "policyFee": {
+            "type": "number",
+            "format": "float"
+          },
+          "premiumPaymentFrequency": {
+            "type": "number",
+            "format": "premiumPaymentFrequency"
+          },
+          "profitShare": {
+            "type": "string"
+          },
+          "intermediary": {
+            "type": "string"
+          }
+        }
+      },
+      "Beneficiary": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string",
+            "format": "address"
+          },
+          "share": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "receiptType": {
+            "type": "string",
+            "format": "receiptType"
+          },
+          "receiptDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "int32"
+          },
+          "receiptCalculation": {
+            "type": "string",
+            "format": "receiptCalculation"
+          },
+          "premiumPaymentMethod": {
+            "type": "string",
+            "format": "paymentMethod"
+          }
+        }
+      },
+      "PremiumBordereau": {
+        "type": "object",
+        "properties": {
+          "treatyReference": {
+            "type": "string"
+          },
+          "policyholder": {
+            "type": "string"
+          },
+          "policyNumber": {
+            "type": "string"
+          },
+          "inceptionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "indemnityLimitPolicy": {
+            "type": "number",
+            "format": "int32"
+          },
+          "grossWrittenPremium": {
+            "type": "number",
+            "format": "int32"
+          },
+          "netPremium": {
+            "type": "number",
+            "format": "int32"
+          },
+          "transactionType": {
+            "type": "string",
+            "format": "receiptType"
+          }
+        }
+      },
+      "ClaimsBordereau": {
+        "type": "object",
+        "properties": {
+          "treatyReference": {
+            "type": "string"
+          },
+          "policyholder": {
+            "type": "string"
+          },
+          "policyNumber": {
+            "type": "string"
+          },
+          "inceptionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "indemnityLimitPolicy": {
+            "type": "number",
+            "format": "int32"
+          },
+          "claimNumber": {
+            "type": "string"
+          },
+          "fnol": {
+            "type": "string",
+            "format": "date"
+          },
+          "dateOfLoss": {
+            "type": "string",
+            "format": "date"
+          },
+          "causeOfLoss": {
+            "type": "string"
+          },
+          "claimant": {
+            "type": "string"
+          },
+          "GrosslLossReserve": {
+            "type": "number",
+            "format": "float"
+          },
+          "excessAmount": {
+            "type": "number",
+            "format": "float"
+          },
+          "expenseReserve": {
+            "type": "number",
+            "format": "float"
+          },
+          "paid": {
+            "type": "number",
+            "format": "float"
+          },
+          "expensesPaid": {
+            "type": "number",
+            "format": "float"
+          },
+          "expectedRecovery": {
+            "type": "number",
+            "format": "float"
+          },
+          "recoveryReceived": {
+            "type": "number",
+            "format": "float"
+          },
+          "claimStatus": {
+            "type": "string",
+            "format": "claimStatus"
+          }
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "building": {
+            "type": "string"
+          },
+          "streetName": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "3_word_address": {
+            "type": "string"
+          }
+        }
+      },
+      "entityType": {
+        "type": "string",
+        "enum": [
+          "reinsurance company",
+          "insurance company",
+          "takaful reinsurance comapny",
+          "takaful insurance company",
+          "mutual insurance company",
+          "peer-to-peer insurance company",
+          "Lloyds syndicate",
+          "reinsurance pool",
+          "captive insurance company",
+          "decentralized autonomous organization",
+          "insurance broker",
+          "insurance agent",
+          "managing general agent",
+          "insurance introducer",
+          "price aggregator",
+          "insurance prediction market",
+          "other"
+        ]
+      },
+      "entityClassification": {
+        "type": "string",
+        "enum": [
+          "property and casualty insurer",
+          "life insurer",
+          "composite insurer",
+          "other"
+        ]
+      },
+      "productCatalog": {
+        "type": "string",
+        "enum": [
+          "property fire insurance",
+          "burglary insurance",
+          "renters insurance",
+          "home and content insurance",
+          "property flood insurance",
+          "debris removal insurance",
+          "motor comprehensive insurance",
+          "motor third party liability insurance",
+          "land transit insurance",
+          "marine cargo insurance",
+          "marine hull and machinery insurance",
+          "marine protection and indemnity",
+          "carriers liability insurance",
+          "medical insurance",
+          "construction all risks insurance",
+          "engineering contractor plant and machinery insurance",
+          "electronic equipment insurance",
+          "equipment breakdown insurance",
+          "decenial liability insurance",
+          "deterioration of stock insurance",
+          "boiler and machinery insurance",
+          "glass insurance",
+          "money cash in transit insurance",
+          "money cash in safe insurance",
+          "fidelity guarantee insurance",
+          "workers compensation insurance",
+          "pet insurance",
+          "bloodstock insurance",
+          "livestock insurance",
+          "personal accident insurance",
+          "term life insurance",
+          "whole of life insurance",
+          "medical malpractice insurance",
+          "professional indemnity insurance",
+          "trade credit insurance",
+          "purchase protection insurance",
+          "travel insurance",
+          "legal expense insurance",
+          "cyber liability insurance",
+          "business interruption insurance",
+          "directors and officers insurance",
+          "key person insurance",
+          "commercial general liability",
+          "employers liability insurance",
+          "environmental liability insurance",
+          "products liability insurance",
+          "property terrorism and sabotage insurance",
+          "business owners insurance",
+          "errors and ommissions insurance",
+          "commercial umbrella insurance",
+          "event insurance",
+          "passenger liability insurance (aviation)",
+          "ground risk hull insurance (aviation)",
+          "in-flight insurance (aviation)",
+          "roadside assistance",
+          "crop insurance",
+          "drone insurance",
+          "gap insurance",
+          "green card",
+          "orange card",
+          "Investment Saving Account (UK market related)",
+          "pension",
+          "endowment",
+          "annuity",
+          "wedding ring insurance"
+        ]
+      },
+      "salutation": {
+        "type": "string",
+        "enum": [
+          "Mr.",
+          "Mrs.",
+          "Ms."
+        ]
+      },
+      "gender": {
+        "type": "string",
+        "enum": [
+          "male",
+          "female",
+          "other"
+        ]
+      },
+      "drivingLicence": {
+        "type": "object",
+        "properties": {
+          "licenceNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "country": {
+            "type": "string"
+          },
+          "licenceCategory": {
+            "type": "string"
+          },
+          "licenceCodes": {
+            "type": "string"
+          }
+        }
+      },
+      "idType": {
+        "type": "string",
+        "enum": [
+          "passport",
+          "national id",
+          "driving licence",
+          "national insurance number",
+          "other"
+        ]
+      },
+      "productModel": {
+        "type": "string",
+        "enum": [
+          "conventional-annual premium",
+          "pay as you drive",
+          "pay how you drive",
+          "subscription (e.g. monthly fee)",
+          "goverment/market tarrif",
+          "other"
+        ]
+      },
+      "contractType": {
+        "type": "string",
+        "enum": [
+          "not automated",
+          "smart contract",
+          "parametric",
+          "other"
+        ]
+      },
+      "policyWording": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "currency": {
+        "type": "string",
+        "enum": [
+          "fiat (ISO-4217)",
+          "cryptocurrency and tokens (Non-ISO 4217)"
+        ]
+      },
+      "paymentMethod": {
+        "type": "string",
+        "enum": [
+          "cash",
+          "credit card",
+          "cheque",
+          "electronic transfer",
+          "crypto currency or tokens"
+        ]
+      },
+      "policyStatus": {
+        "type": "string",
+        "enum": [
+          "in force",
+          "cancelled",
+          "lapsed",
+          "extended"
+        ]
+      },
+      "motorPeril": {
+        "type": "string",
+        "enum": [
+          "liability towards third parties",
+          "fire",
+          "theft",
+          "accidental damage",
+          "windshield damage",
+          "malicious damage",
+          "terrorism and sabotage",
+          "flood",
+          "earthquake",
+          "volcanic erruption",
+          "tsunami",
+          "hail",
+          "unkown or hit and run",
+          "riots",
+          "strikes",
+          "civil commotion",
+          "war"
+        ]
+      },
+      "conviction": {
+        "type": "object",
+        "properties": {
+          "offenceDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "offenceCode": {
+            "type": "string",
+            "format": "offenceCode"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "points": {
+            "type": "number",
+            "format": "int32"
+          },
+          "fine": {
+            "type": "number",
+            "format": "float"
+          },
+          "fineCurrency": {
+            "type": "string",
+            "format": "currency"
+          },
+          "suspension": {
+            "type": "boolean"
+          },
+          "suspensionLength": {
+            "type": "number",
+            "format": "int32"
+          }
+        }
+      },
+      "offenceCode": {
+        "type": "string",
+        "enum": [
+          "AC10",
+          "AC20",
+          "AC30",
+          "BA10",
+          "BA30",
+          "BA40",
+          "BA60",
+          "CD10",
+          "CD20",
+          "CD30",
+          "CD40",
+          "CD50",
+          "CD60",
+          "CD70",
+          "CD80",
+          "CD90",
+          "CU10",
+          "CU20",
+          "CU30",
+          "CU40",
+          "CU50",
+          "CU80",
+          "DD10",
+          "DD40",
+          "DD60",
+          "DD80 - DD90 - DR10 - DR20 - DR30 - DR31 - DR61 - DR40 - DR50 - DR60 - DR70 - DG10 - DG60 - DR80 - DG40 - DR70 - DR90 - IN10 - LC20 - LC30 - LC40 - LC50 - MS10 - MS20 - MS30 - MS50 - MS60 - MS70 - MS80 - MS90 - MW10 - PC10 - PC20 - PC30 - SP10 - SP20 - SP30 - SP40 - SP50 - TS10 - TS20 - TS30 - TS40 - TS50 - TS60 - TS70 - UT50 - MR09 - MR19 - MR29 - MR39 - MR49 - MR59"
+        ]
+      },
+      "medicalCondition": {
+        "type": "object",
+        "properties": {
+          "notifiable condition": {
+            "type": "string",
+            "format": "notifiableCondition"
+          },
+          "status": {
+            "type": "string"
+          },
+          "medical DVLA restriction": {
+            "type": "string"
+          },
+          "medical treatment": {
+            "type": "string"
+          },
+          "bypass Operation": {
+            "type": "boolean"
+          },
+          "insulin Injected": {
+            "type": "boolean"
+          },
+          "daily insulin units": {
+            "type": "number",
+            "format": "int32"
+          }
+        }
+      },
+      "workstatus": {
+        "type": "string",
+        "enum": [
+          "self employed",
+          "retired",
+          "employed",
+          "redundnt"
+        ]
+      },
+      "notifiableCondition": {
+        "type": "string",
+        "enum": [
+          "diabetes",
+          "syncope",
+          "heart condition",
+          "sleep aponea",
+          "epilepsy",
+          "strokes",
+          null
+        ]
+      },
+      "benefit": {
+        "type": "string",
+        "enum": [
+          "personal accident",
+          "replacement vehicle",
+          "roadside assisstance"
+        ]
+      },
+      "premiumPaymentFrequency": {
+        "type": "string",
+        "enum": [
+          "annual",
+          "bi-annual",
+          "quarterly",
+          "monthly",
+          "bi-monthly",
+          "weekly",
+          "daily",
+          "usage based or on demand",
+          "subscription (not an annual contract)",
+          "other"
+        ]
+      },
+      "bodyType": {
+        "type": "string",
+        "enum": [
+          "motor car",
+          "motorcycle",
+          "motorized tricycle",
+          "electric scooter",
+          "quadcycle",
+          "trailer head",
+          "van",
+          "bus",
+          "tracktor",
+          "pod",
+          "motor home",
+          "construction equipment"
+        ]
+      },
+      "fuelType": {
+        "type": "string",
+        "enum": [
+          "petrol",
+          "diesel",
+          "electric",
+          "petrol/electric hybrid",
+          "gas",
+          "hydrogen"
+        ]
+      },
+      "aiClassification": {
+        "type": "string",
+        "enum": [
+          "level 0 autonomous vehicle (SAE standard)",
+          "level 1 autonomous vehicle (SAE standard)",
+          "level 2 autonomous vehicle (SAE standard)",
+          "level 3 autonomous vehicle (SAE standard)",
+          "level 4 autonomous vehicle (SAE standard)",
+          "level 5 autonomous vehicle (SAE standard)"
+        ]
+      },
+      "vehicleUse": {
+        "type": "string",
+        "enum": [
+          "businees",
+          "business and leisure",
+          "commercial",
+          "vehicle sharing",
+          "vehicle subscription"
+        ]
+      },
+      "endorsementType": {
+        "type": "string",
+        "enum": [
+          "addition/increase",
+          "deletion/decrease",
+          "policy cancellation",
+          "policy extension",
+          "policy declaration",
+          "policy transfer",
+          "policy renewal"
+        ]
+      },
+      "receiptType": {
+        "type": "string",
+        "enum": [
+          "new policy",
+          "policy renewal",
+          "mid term adjustment",
+          "claim payment",
+          "brokerage payment",
+          "profit share payment",
+          "other"
+        ]
+      },
+      "receiptCalculation": {
+        "type": "string",
+        "enum": [
+          "pro rata",
+          "flat"
+        ]
+      },
+      "claimType": {
+        "type": "string",
+        "enum": [
+          "own property damage",
+          "third party bodily injury",
+          "third party property damage",
+          "other"
+        ]
+      },
+      "claimStatus": {
+        "type": "string",
+        "enum": [
+          "open",
+          "closed",
+          "reopened"
+        ]
+      },
+      "legalEntity": {
+        "type": "string",
+        "enum": [
+          "sole trader",
+          "private limited company",
+          "public limited company",
+          "general partnerships",
+          "limited partnership"
+        ]
+      },
+      "tradeCreditPeril": {
+        "type": "string",
+        "enum": [
+          "bankruptcy",
+          "insolvency",
+          "protracted default",
+          "political risks"
+        ]
+      },
+      "pet": {
+        "type": "object",
+        "properties": {
+          "petName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "petKind": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number",
+            "format": "float"
+          },
+          "purebred": {
+            "type": "boolean"
+          },
+          "petBreed": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": {
+            "type": "string"
+          },
+          "reimbursement": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "petBenefits": {
+        "type": "string",
+        "enum": [
+          "Veterinary exam fees",
+          "Hospitalization",
+          "Surgeries",
+          "Injuries and illnesses",
+          "Cancer",
+          "Specialty and emergency vets",
+          "Chronic conditions",
+          "Hereditary conditions",
+          "X-rays, MRIs, CT scans, ultrasounds",
+          "Diagnostic testing",
+          "Prescription medication",
+          "Prescribed therapeutic diets",
+          "Prescribed nutritional supplements",
+          "Dental diseases",
+          "Congenital conditions",
+          "Blood disorders",
+          "Eye disorders",
+          "Musculoskeletal disorders",
+          "Respiratory conditions",
+          "Behavioral exam and treatment",
+          "Pre-existing conditions",
+          "Boarding/grooming",
+          "Cosmetic procedures",
+          "Anal gland expression",
+          "Preventive gastropexy",
+          "Vaccination or titer",
+          "Heartworm or FeLV/FIV test",
+          "Fecal test",
+          "Deworming",
+          "Microchip",
+          "Health certificate",
+          "Flea control",
+          "Heartworm prevention",
+          "Tick control",
+          "Dental cleaning",
+          "Spay or neuter",
+          "Treatment of internal and external parasites",
+          "Diagnostic testing"
+        ]
+      },
+      "petBreed": {
+        "type": "string",
+        "enum": [
+          "Abyssinian Sand Terrier",
+          "Affenpinscher",
+          "Afghan Hound",
+          "Airedale Terrier",
+          "Akbash",
+          "Akita",
+          "Alapaha Blue Blood Bulldog",
+          "Alaskan Husky",
+          "Alaskan Klee Kai",
+          "Alaskan Malamute",
+          "American Bulldog",
+          "American Cocker Spaniel",
+          "American English Coonhound",
+          "American Eskimo- Standard",
+          "American Eskimo-miniature",
+          "American Eskimo-teacup Or Toy",
+          "American Foxhound",
+          "American Hairless Terrier",
+          "American Indian Dog",
+          "American Pit Bull Terrier",
+          "American Staffordshire Terrier",
+          "American Staghound",
+          "American Tundra Shepherd",
+          "American Water Spaniel",
+          "Anatolian Shepherd Dog",
+          "Appenzeller Sennenhunde",
+          "Australian Cattle Dog",
+          "Australian Cattle Dog-blue Heeler",
+          "Australian Cattle Dog-queensland Heeler",
+          "Australian Kelpie",
+          "Australian Labradoodle",
+          "Australian Shepherd",
+          "Australian Shepherd- Toy",
+          "Australian Shepherd-miniature",
+          "Australian Shepherd-teacup",
+          "Australian Terrier",
+          "Azawakh",
+          "Basenji",
+          "Basset Fauve De Bretagne",
+          "Basset Hound",
+          "Beagle",
+          "Bearded Collie",
+          "Beauceron",
+          "Bedlington Terrier",
+          "Belgian Groenendal",
+          "Belgian Laekenois",
+          "Belgian Malinois",
+          "Belgian Sheepdog",
+          "Belgian Tervuren",
+          "Bergamasco Sheepdog",
+          "Berger Blanc Suisse",
+          "Berger Picard",
+          "Bernese Mountain Dog",
+          "Bichon Frise",
+          "Bichpoo",
+          "Biewer Terrier",
+          "Black And Tan Coonhound",
+          "Black Mouth Cur",
+          "Black Russian Terrier",
+          "Bloodhound",
+          "Bluetick Coonhound",
+          "Boerboel",
+          "Boggle",
+          "Bolognese",
+          "Border Collie",
+          "Border Terrier",
+          "Borzoi",
+          "Boston Terrier",
+          "Bouvier Des Flandres",
+          "Boxer",
+          "Boykin Spaniel",
+          "Bracco Italiano",
+          "Braque Du Bourbonnais",
+          "Braque Francais Pyrenean",
+          "Briard",
+          "Brittany Spaniel",
+          "Brussels Griffon",
+          "Bull Mastiff",
+          "Cairn Terrier",
+          "Canaan Dog",
+          "Cane Corso",
+          "Cardigan Welsh Corgi",
+          "Carolina Dog",
+          "Catahoula Leopard Dog",
+          "Catalonian Sheepdog",
+          "Caucasian Shepherd Dog",
+          "Cavachon",
+          "Cavalier King Charles Spaniel",
+          "Cavapoo",
+          "Central Asian Shepherd Dog",
+          "Cesky Terrier",
+          "Chesapeake Bay Retriever",
+          "Chihuahua",
+          "Chihuahua-longhaired",
+          "Chinese Crested",
+          "Chinese Crested-powderpuff",
+          "Chinese Shar-pei",
+          "Chinook",
+          "Chow Chow",
+          "Cirneco Dell'etna",
+          "Clumber Spaniel",
+          "Cockalier",
+          "Cockapoo",
+          "Collie-rough",
+          "Collie-smooth-coat",
+          "Coton De Tulear",
+          "Curly-coated Retriever",
+          "Czechoslovakian Vlcak",
+          "Dachshund-miniature",
+          "Dachshund-standard",
+          "Dalmatian",
+          "Dandie Dinmont Terrier",
+          "Danish Swedish Farm Dog",
+          "Doberman Pinscher",
+          "Dogo Argentine",
+          "Dogue De Bordeaux",
+          "Dutch Shepherd",
+          "English Bull Terrier-miniature",
+          "English Bull Terrier-standard",
+          "English Bulldog",
+          "English Cocker Spaniel",
+          "English Foxhound",
+          "English Mastiff",
+          "English Pointer",
+          "English Setter",
+          "English Shepherd",
+          "English Springer Spaniel",
+          "English Toy Spaniel",
+          "Entlebucher Mountain Dog",
+          "Estrela Mountain Dog",
+          "Field Spaniel",
+          "Fila Brasileiro",
+          "Finnish Hound",
+          "Finnish Lapphund",
+          "Finnish Spitz",
+          "Flat-coated Retriever",
+          "Fourche Terrier",
+          "Fox Terrier-smooth Or Wirehair",
+          "French Bulldog",
+          "French Spainiel (Epagneul Francais)",
+          "German Pinscher",
+          "German Shepherd",
+          "German Shorthaired Pointer",
+          "German Spitz",
+          "German Wirehaired Pointer",
+          "Glen Of Imaal Terrier",
+          "Golden Retriever",
+          "Goldendoodle",
+          "Goldendoodle-miniature",
+          "Gordon Setter",
+          "Grand Basset Griffon Vendeen",
+          "Great Dane",
+          "Great Pyrenees",
+          "Greater Swiss Mountain Dog",
+          "Greek Harehound",
+          "Greyhound",
+          "Harrier",
+          "Havanese",
+          "Hovawart",
+          "Ibizan Hound",
+          "Icelandic Sheepdog",
+          "Irish Red And White Setter",
+          "Irish Setter",
+          "Irish Terrier",
+          "Irish Water Spaniel",
+          "Irish Wolfhound",
+          "Italian Greyhound",
+          "Jack Russell Terrier",
+          "Japanese Chin",
+          "Jindo",
+          "Kai Ken",
+          "Karelian Bear Dog",
+          "Keeshond",
+          "Kerry Blue Terrier",
+          "Kishu Ken",
+          "Komondor",
+          "Kuvasz",
+          "Kyi-leo",
+          "Labradoodle",
+          "Labradoodle-miniature",
+          "Labrador Retriever",
+          "Lagotto Romagnolo",
+          "Lakeland Terrier",
+          "Lancashire Heeler",
+          "Leonberger",
+          "Lhasa Apso",
+          "Lhasa Poo",
+          "Lowchen",
+          "Maltese",
+          "Maltipoo",
+          "Manchester Terrier",
+          "Maremma Sheepdog",
+          "Mastiff",
+          "Mi-ki",
+          "Miniature Pinscher",
+          "Mixed (Large 51-110 Lbs.)",
+          "Mixed (Medium 31-50 Lbs.)",
+          "Mixed (Small 11-30 Lbs.)",
+          "Mixed (Toy 0-10 Lbs.)",
+          "Mixed (X Large 111 Lbs. Or Greater)",
+          "Morkie",
+          "Mountain Cur",
+          "Mudi",
+          "Munsterlander-large",
+          "Munsterlander-small",
+          "Neapolitan Mastiff",
+          "Nederlandse Kooikerhondje",
+          "New Zealand Huntaway",
+          "Newfoundland",
+          "Norfolk Terrier",
+          "Northern Inuit Dog",
+          "Norwegian Buhund",
+          "Norwegian Elkhound",
+          "Norwegian Lundehund",
+          "Norwich Terrier",
+          "Nova Scotia Duck Tolling Retriever",
+          "Old Danish Pointing Dog",
+          "Old English Sheepdog",
+          "Olde English Bulldogge",
+          "Otter Hound",
+          "Papillon",
+          "Parson Russell Terrier",
+          "Patterdale Terrier",
+          "Peekapoo",
+          "Pekingese",
+          "Pembroke Welsh Corgi",
+          "Perro De Presa Canario",
+          "Peruvian Inca Orchid",
+          "Petit Basset Griffon Vendeen",
+          "Pharaoh Hound",
+          "Plott Hound",
+          "Polish Lowland Sheepdog",
+          "Polish Tatra Sheepdog",
+          "Pomeranian",
+          "Pompoo",
+          "Poodle-miniature",
+          "Poodle-standard",
+          "Poodle-teacup",
+          "Poodle-toy",
+          "Portuguese Podengo-large",
+          "Portuguese Podengo-medium",
+          "Portuguese Podengo-small",
+          "Portuguese Pointer",
+          "Portuguese Water Dog",
+          "Pudelpointer",
+          "Pug",
+          "Puggle",
+          "Puli",
+          "Pumi",
+          "Pyrenean Mastiff",
+          "Pyrenean Shepherd",
+          "Rafeiro Do Alentejo",
+          "Rat Terrier",
+          "Redbone Coonhound",
+          "Rhodesian Ridgeback",
+          "Rottweiler",
+          "Russian Toy Terrier",
+          "Russian Tsvetnaya Bolonka",
+          "Saint Bernard",
+          "Saluki",
+          "Samoyed",
+          "Sapsaree",
+          "Sarplaninac",
+          "Schapendoes",
+          "Schipperke",
+          "Schnauzer-giant",
+          "Schnauzer-miniature",
+          "Schnauzer-standard",
+          "Schnoodle",
+          "Scottish Deerhound",
+          "Scottish Terrier",
+          "Sealyham Terrier",
+          "Shetland Sheepdog",
+          "Shiba Inu",
+          "Shichon",
+          "Shih Poo",
+          "Shih Tzu",
+          "Shikoku",
+          "Shiloh Shepherd",
+          "Siberian Husky",
+          "Silken Windhound",
+          "Silky Terrier",
+          "Skye Terrier",
+          "Sloughi",
+          "Slovensky Cuvac",
+          "Soft Coated Wheaten Terrier",
+          "Spanish Mastiff",
+          "Spanish Water Dog",
+          "Spinone Italiano",
+          "Spitz",
+          "Stabyhoun",
+          "Staffordshire Bull Terrier",
+          "Sussex Spaniel",
+          "Swedish Lapphund",
+          "Swedish Vallhund",
+          "Telomian",
+          "Texas Blue Lacy",
+          "Thai Ridgeback",
+          "Tibetan Mastiff",
+          "Tibetan Spaniel",
+          "Tibetan Terrier",
+          "Tosa (Japanese Mastiff)",
+          "Toy Fox Terrier",
+          "Treeing Tennessee Brindle",
+          "Treeing Walker Coonhound",
+          "Unknown",
+          "Victorian Bulldog",
+          "Vizsla",
+          "Weimaraner",
+          "Welsh Springer Spaniel",
+          "Welsh Terrier",
+          "West Highland White Terrier",
+          "Whippet",
+          "White Shepherd",
+          "Wirehaired Pointing Griffon",
+          "Wolf Hybrid-non F1 Generation",
+          "Xoloitzcuintli-standard",
+          "Yorkiepoo",
+          "Yorkshire Terrier"
+        ]
+      },
+      "petKind": {
+        "type": "string",
+        "enum": [
+          "cat",
+          "dog",
+          "bird",
+          "exotic",
+          "rabbit"
+        ]
+      },
+      "distanceUnit": {
+        "type": "string",
+        "enum": [
+          "km",
+          "mile"
+        ]
+      },
+      "propertyType": {
+        "type": "string",
+        "enum": [
+          "Agriculture",
+          "Airport",
+          "AnimalShelter",
+          "Apartment",
+          "ApartmentComplex",
+          "Aquarium",
+          "Archive Organization",
+          "Automotive Business",
+          "Beach",
+          "Boat Slip",
+          "BoatTerminal",
+          "Bridge",
+          "Bungalow",
+          "Business",
+          "BusStation",
+          "BusStop",
+          "Cabin",
+          "Campground",
+          "Cemetery",
+          "Chalet",
+          "ChildCare",
+          "Condominium",
+          "Crematorium",
+          "Deeded Parking",
+          "Dentist",
+          "Dry Cleaning Or Laundry",
+          "Duplex",
+          "Educational Organization",
+          "Emergency Service",
+          "Employment Agency",
+          "Entertainment Business",
+          "Event Venue",
+          "Farm",
+          "Financial Service",
+          "Fire Station",
+          "Food Establishment",
+          "Gated Residence Community",
+          "Government Building",
+          "Government Office",
+          "Hall of Residence",
+          "Health and Beauty Business",
+          "Home and Construction Business",
+          "Hospital",
+          "Hotel or Motel",
+          "Industrial",
+          "InternetCafe",
+          "LegalService",
+          "Library",
+          "LodgingBusiness",
+          "Maisonette",
+          "Manufactured Home",
+          "Manufactured On Land",
+          "MedicalBusiness",
+          "Mixed Use",
+          "Mobile Home",
+          "MovieTheater",
+          "Multi Family",
+          "Museum",
+          "Music Venue",
+          "Office",
+          "Own Your Own",
+          "Park",
+          "Parking Facility",
+          "Performing Arts Theater",
+          "Place of Worship",
+          "Playground",
+          "PoliceStation",
+          "Professional Service",
+          "PublicToilet",
+          "Quadruplex",
+          "RadioStation",
+          "Ranch",
+          "Real Estate Agent",
+          "Recycling Center",
+          "Residential Caravan",
+          "Retail",
+          "RVPark",
+          "Self Storage",
+          "Shopping Center",
+          "Show House",
+          "Single Family Residence",
+          "Sports Activity Location",
+          "Stadium or Arena",
+          "Stock Cooperative",
+          "Store",
+          "Subway Station",
+          "TaxiStand",
+          "Television Station",
+          "Timeshare",
+          "Tourist Information Center",
+          "Townhouse",
+          "Train Station",
+          "Travel Agency",
+          "Triplex",
+          "Under construction",
+          "Warehouse",
+          "Zoo"
+        ]
+      },
+      "propertyPeril": {
+        "type": "string",
+        "enum": [
+          "aircraft or parts dropeed thereof",
+          "Avalanche",
+          "Burglary",
+          "Burst pipes or water apparatus",
+          "Civil Commotions",
+          "Coastal flood",
+          "Cyclone",
+          "Earthquake",
+          "Earthquake fire",
+          "Fire",
+          "Flood - Backing up of Drains",
+          "Flood - Non-Coastal",
+          "Freeze or Ice",
+          "Ground Water flood",
+          "Hail",
+          "Hurricane",
+          "Landslide",
+          "Lightning",
+          "Mudslide",
+          "Rain",
+          "Reservoir flood",
+          "Riots",
+          "River flood",
+          "Run-off flood",
+          "Smoke",
+          "Snow",
+          "Sprinler leakage",
+          "Strikes",
+          "Strom",
+          "Subsidence",
+          "Tempest",
+          "Terrorism",
+          "Tsunami",
+          "Typhoon",
+          "War",
+          "Weight of Snow",
+          "Wind Storm"
+        ]
+      },
+      "wallConstruction": {
+        "type": "string",
+        "enum": [
+          "Aluminium",
+          "Asbestos",
+          "Brick",
+          "Bungaroosh",
+          "Clay-Lump/Adobe",
+          "Clunch",
+          "Cob Construction",
+          "Concrete",
+          "Corrugated Iron",
+          "Essex Construction",
+          "Fibreglass Construction",
+          "Flint",
+          "Glass",
+          "Lathe And Plaster",
+          "Metal",
+          "Mundic Block",
+          "Other",
+          "Plastic",
+          "Prefabricated Building - Combustible Materials",
+          "Prefabricated Building - Non Combustible Materials",
+          "Standard Construction",
+          "Steel Frame",
+          "Steel Frame/Brick",
+          "Steel Frame/Render Or Pebbledash",
+          "Steel Frame/Tile",
+          "Steel Frame/Wood Shiplap",
+          "Stone",
+          "Stramit Construction",
+          "Straw Bale",
+          "Structurally Insulated Panels (SIPs)",
+          "Timber",
+          "Timber Frame",
+          "Timber Frame/Brick",
+          "Timber Frame/Lathe And Plaster",
+          "Timber Frame/Stone",
+          "Timber Frame/Timber",
+          "Timber/Plaster",
+          "Wattle And Daub Construction",
+          "Woodwall",
+          "Woodwork Construction"
+        ]
+      },
+      "rootConstruction": {
+        "type": "string",
+        "enum": [
+          "Aluminium",
+          "Asbestos",
+          "Asphalt",
+          "Concrete",
+          "Copper",
+          "Corrugated Iron",
+          "Ethylene Propylene Diene Monomer EPDM",
+          "Felt On Timber",
+          "Fibreglass",
+          "Glass",
+          "Green Roofs",
+          "Lead",
+          "Metal",
+          "Other",
+          "Plastic",
+          "Polycarbonate",
+          "Reinforced PVC",
+          "Shingle",
+          "Shingle - Asphalt",
+          "Shingle - Pine/Spruce/Cedar",
+          "Slate",
+          "Standard Construction",
+          "Stramit",
+          "Thatch - Fibre",
+          "Thatch - Reed",
+          "Tile",
+          "Timber",
+          "Turnerised",
+          "Woodwork Construction",
+          "Zinc"
+        ]
+      },
+      "claimsOccurrence": {
+        "type": "string",
+        "enum": [
+          "Claims occurring",
+          "Claims made"
+        ]
+      },
+      "typeBusinessInterruption": {
+        "type": "string",
+        "enum": [
+          "Business Interruption",
+          "Increased Cost of Working (ICOW)",
+          "Contingent Loss of Profit"
+        ]
+      },
+      "cyberCoverageCategories": {
+        "type": "string",
+        "enum": [
+          "Data and software loss",
+          "Breach of privacy",
+          "Incident management and notification costs",
+          "Kidnap and Ransom (Extortion)",
+          "Business interruption",
+          "Contingent business interruption",
+          "Multi-media laibilities (disparagement)",
+          "Legal and defence costs",
+          "Reputational damage",
+          "Network service failure liability",
+          "Errors and omissions",
+          "Professional indemnity",
+          "Fidelity, fraud and Theft",
+          "Theft of intectual property",
+          "Physical asset damage",
+          "Compensation to injured parties",
+          "Cyber terrorism",
+          "Fines and penalties",
+          "Directors and officers liability",
+          "General liability",
+          "Environmental damage"
+        ]
+      },
+      "termLifeType": {
+        "type": "string",
+        "enum": [
+          "Term life",
+          "Decreasing term",
+          "Renewable term"
+        ]
+      },
+      "termLifeRiders": {
+        "type": "string",
+        "enum": [
+          "Accidental death benefit",
+          "Total permanent disability",
+          "Total and partial permanent disability",
+          "Critical illness",
+          "Convertible term"
+        ]
+      }
+    }
+  }
+}
